@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Shootball : MonoBehaviour
 {
     public float startPosx;
@@ -11,7 +10,7 @@ public class Shootball : MonoBehaviour
     public float directionx;
     public float directionz;
     Rigidbody myRigidbody;
-    public float shootPower = 10f;
+    public float shootPower = 1f;
 
     void Start()
     {
@@ -22,7 +21,7 @@ public class Shootball : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            startPosz = Input.mousePosition.z;
+            startPosz = Input.mousePosition.y;
             startPosx = Input.mousePosition.x;
         }
     }
@@ -32,11 +31,19 @@ public class Shootball : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             endPosx = Input.mousePosition.x;
-            endPosz = Input.mousePosition.z;
+            endPosz = Input.mousePosition.y;
             directionx = startPosx - endPosx;
+            if (directionx > 20)
+            {
+                directionx = 20;
+            } 
             directionz = startPosz - endPosz;
+            if (directionz > 20)
+            {
+                directionz = 20;
+            }
             myRigidbody.isKinematic = false;
-            myRigidbody.AddForce(directionx * shootPower, 0, directionz * shootPower);
+            myRigidbody.AddForce(directionz * shootPower*-1, 0, directionx * shootPower*-1, ForceMode.Impulse);
         }
     }
 }
