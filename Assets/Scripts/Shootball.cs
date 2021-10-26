@@ -33,15 +33,8 @@ public class Shootball : MonoBehaviour
             endPosx = Input.mousePosition.x;
             endPosz = Input.mousePosition.y;
             directionx = startPosx - endPosx;
-            if (directionx > 20)
-            {
-                directionx = 20;
-            } 
             directionz = startPosz - endPosz;
-            if (directionz > 20)
-            {
-                directionz = 20;
-            }
+
             myRigidbody.isKinematic = false;
             myRigidbody.AddForce(directionz * shootPower*-1, 0, directionx * shootPower*-1, ForceMode.Impulse);
         }
